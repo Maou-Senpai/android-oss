@@ -1,8 +1,6 @@
 package com.kickstarter;
 
-import android.Manifest;
 import android.content.Context;
-import android.os.Looper;
 
 import com.kickstarter.libs.Environment;
 import com.kickstarter.libs.KSString;
@@ -25,10 +23,7 @@ import org.joda.time.DateTimeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import androidx.annotation.NonNull;
 import androidx.test.core.app.ApplicationProvider;
@@ -75,8 +70,7 @@ public abstract class KSRobolectricTestCase extends TestCase {
       return this.application;
     }
 
-    Context context = ApplicationProvider.getApplicationContext();
-    this.application = (TestKSApplication) context;
+    this.application = ApplicationProvider.getApplicationContext();
 
     return this.application;
   }
