@@ -31,6 +31,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import androidx.annotation.NonNull;
+import androidx.test.core.app.ApplicationProvider;
+
 import rx.observers.TestSubscriber;
 
 @RunWith(KSRobolectricGradleTestRunner.class)
@@ -54,6 +56,8 @@ public abstract class KSRobolectricTestCase extends TestCase {
 
     DateTimeUtils.setCurrentMillisFixed(new DateTime().getMillis());
 
+    // - TODO: Create component for testing, we are creating here the real component, and then overriding the environment with mock objects
+    // - we should create a dagger test application component that injects the mocked objects into the environment, instead of overriding the already created one
     this.environment = application().component().environment().toBuilder()
       .apiClient(new MockApiClient())
       .apolloClient(new MockApolloClient())
@@ -71,10 +75,8 @@ public abstract class KSRobolectricTestCase extends TestCase {
       return this.application;
     }
 
-    this.application = (TestKSApplication) RuntimeEnvironment.application;
-    final ShadowApplication app = Shadows.shadowOf(this.application);
-    app.grantPermissions(Manifest.permission.INTERNET);
-    Shadows.shadowOf(Looper.getMainLooper()).idle();
+    Context context = ApplicationProvider.getApplicationContext();
+    this.application = (TestKSApplication) context;
 
     return this.application;
   }
