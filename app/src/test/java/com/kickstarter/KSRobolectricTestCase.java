@@ -72,7 +72,7 @@ public abstract class KSRobolectricTestCase extends TestCase {
     }
 
     this.application = (TestKSApplication) RuntimeEnvironment.application;
-    ShadowApplication app = Shadows.shadowOf(this.application);
+    final ShadowApplication app = Shadows.shadowOf(this.application);
     app.grantPermissions(Manifest.permission.INTERNET);
     Shadows.shadowOf(Looper.getMainLooper()).idle();
 
