@@ -4,8 +4,6 @@ import android.os.Looper;
 
 import com.kickstarter.KSRobolectricTestCase;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.robolectric.shadows.ShadowLooper;
 
@@ -13,24 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import rx.Observable;
 import rx.Scheduler;
-import rx.android.plugins.RxAndroidPlugins;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.kickstarter.libs.rx.transformers.Transformers.observeForUI;
 
 public final class ObserveForUITransformerTest extends KSRobolectricTestCase {
-  @Before
-  public void setUp() {
-    RxAndroidPlugins.getInstance().reset();
-    ShadowLooper.pauseMainLooper();
-  }
-
-  @After
-  public void tearDown() {
-    RxAndroidPlugins.getInstance().reset();
-    ShadowLooper.unPauseMainLooper();
-  }
 
   @Test
   public void test() {
